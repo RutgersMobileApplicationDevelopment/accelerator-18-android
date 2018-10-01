@@ -8,13 +8,19 @@ These are the materials for the Android Track of the Accelerator. Feel free to u
 
 Each week we will cover a new topic different topic within Android Development. You can expect to learn the following:
 
-* How to program in Swift
-* How to create user interfaces with Interface Builder and Storyboards
-* Making flexible user interfaces with Auto Layout
-* Navigation between screens
-* Table views and Collections views
-* Making network requests
-* Saving data locally
+* Android Studio 
+* Activities/Fragments
+* Intents
+* Networking
+* Recyclerviews
+* Services
+* Database interactions 
+* Design patterns
+* Data loading/caching/ presenting
+* Kotlin
+* UX patterns
+* Animations
+
 
 ## Mentors
 
