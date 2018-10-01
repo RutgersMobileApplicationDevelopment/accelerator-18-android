@@ -24,7 +24,7 @@ Each week we will cover a new topic different topic within Android Development. 
 
 ## Mentors
 
-|Photo|Name|Contact|Fun fact|
-|---|---|---|---|
-|<img src="/instructor/ryan.jpg" width="200px" />|Hemanth Chiluka|[fb messenger](https://m.me/Ludakrishna)|I apparently laugh while I sleep.|
-|<img src="/instructor/IMG_2310.jpg" width="200px" />|Sean Lane|[fb messenger](https://m.me/seantaylorlane)|I wave flags in front of fast cars and bikes from time to time.|
+|Photo|Name|Contact|
+|---|---|---|
+|<img src="/instructor/ryan.jpg" width="200px" />|Hemanth Chiluka|[fb messenger](https://m.me/Ludakrishna)|
+|<img src="/instructor/IMG_2310.jpg" width="200px" />|Sean Lane|[fb messenger](https://m.me/seantaylorlane)|
