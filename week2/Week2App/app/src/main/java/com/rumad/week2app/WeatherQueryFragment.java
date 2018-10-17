@@ -71,7 +71,7 @@ public class WeatherQueryFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_weather_query, container, false);
         editText = view.findViewById(R.id.editText);
-        
+
         return view;
     }
 
