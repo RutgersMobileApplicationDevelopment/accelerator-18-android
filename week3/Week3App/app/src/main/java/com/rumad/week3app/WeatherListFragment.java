@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class WeatherListFragment extends Fragment {
     RecyclerView recyclerView;
 
+    String [] names = new String[] { "Jay", "Mazaya", "Miles", "Sangho", "Zaid"};
 
     public WeatherListFragment() {
         // Required empty public constructor
