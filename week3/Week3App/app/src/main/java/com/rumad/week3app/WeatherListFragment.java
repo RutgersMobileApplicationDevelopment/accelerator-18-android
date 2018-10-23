@@ -6,14 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.rumad.week3app.model.WeatherResponse;
+import com.rumad.week3app.service.RetrofitClient;
+import com.rumad.week3app.service.WeatherService;
+
+import java.io.IOException;
+
 
 public class WeatherListFragment extends Fragment {
+
     RecyclerView recyclerView;
 
     String [] names = new String[] { "Jay", "Mazaya", "Miles", "Sangho", "Zaid"};
@@ -25,6 +37,8 @@ public class WeatherListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_weather_list, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerview_weather);
