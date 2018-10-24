@@ -1,0 +1,9 @@
+<resources>
+    <!-- System strings -->
+    <string name="app_name">Hello World</string>
+
+    <!-- Button Labels -->
+    <string name="button_change_activity">Change Activity!</string>
+
+    <string name="toast_button_clicked">You clicked the button!</string>
+</resources>
