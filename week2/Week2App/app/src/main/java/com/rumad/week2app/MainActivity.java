@@ -11,8 +11,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherListFragment.OnItemClickedListener {
     FrameLayout frameLayout;
+
+    @Override
+    public void onItemClicked(String name) {
+        setTitle(name);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.frame_layout_holder, fragment);
         fragmentTransaction.addToBackStack(null);
-
 
         fragmentTransaction.commit();
     }

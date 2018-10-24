@@ -17,10 +17,25 @@ import android.widget.TextView;
 
 public class WeatherListFragment extends Fragment {
     RecyclerView recyclerView;
-
+    OnItemClickedListener callback;
 
     String [] names = new String[] { "Jay", "Mazaya", "Miles", "Sangho", "Zaid"};
 
+    public interface OnItemClickedListener {
+        public void onItemClicked(String name);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try{
+            callback = (OnItemClickedListener) getActivity();
+        }catch (ClassCastException e){
+            throw new ClassCastException((getActivity().toString() + "must implement " + OnItemClickedListener.class.getCanonicalName()));
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,14 +68,21 @@ public class WeatherListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull WeatherViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull WeatherViewHolder holder, final int position) {
             TextView textView = holder.itemView.findViewById(R.id.textView);
-            textView.setText("Howdy Ho");
+            textView.setText(names[position]);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callback.onItemClicked(names[position]);
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return names.length;
         }
     }
 
