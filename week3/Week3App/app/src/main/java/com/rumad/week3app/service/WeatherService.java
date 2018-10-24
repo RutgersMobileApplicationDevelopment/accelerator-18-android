@@ -11,6 +11,10 @@ public interface WeatherService {
      String APP_ID = "d8e7907c99a2a1b5a167553df8bf8fed";
 
     @GET("/data/2.5/weather")
-    Call<WeatherResponse> getCurrentWeather(@Query("appid") String appid, @Query("q") String city, @Query("lat") String lat, @Query("long") String lng, @Query("zip") String zip);
+    Call<WeatherResponse> getCurrentWeather(@Query("appid") String appid,
+                                            @Query("q") String city,
+                                            @Query("lat") String lat,
+                                            @Query("long") String lng,
+                                            @Query("zip") String zip);
 
 }

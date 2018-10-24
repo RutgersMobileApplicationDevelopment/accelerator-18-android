@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.rumad.week3app.model.WeatherResponse;
 import com.rumad.week3app.service.RetrofitClient;
@@ -24,6 +25,9 @@ public class WeatherQueryFragment extends Fragment {
 
     EditText editText;
     Button weatherButton;
+
+    TextView textviewCity;
+    TextView textviewTemp;
 
     public WeatherQueryFragment() {
         // Required empty public constructor
@@ -43,6 +47,8 @@ public class WeatherQueryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_weather_query, container, false);
         editText = view.findViewById(R.id.editText);
         weatherButton = view.findViewById(R.id.weather_button);
+        textviewCity = view.findViewById(R.id.textview_city);
+        textviewTemp = view.findViewById(R.id.textview_temp);
 
         weatherButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +60,8 @@ public class WeatherQueryFragment extends Fragment {
                                 if (response.body() != null) {
                                     Log.d(WeatherListFragment.class.getName(), response.body().toString());
                                 }
+                                textviewCity.setText(response.body().getName());
+                                textviewTemp.setText(Double.toString(response.body().getMain().getTemp()));
                             }
 
                             @Override
