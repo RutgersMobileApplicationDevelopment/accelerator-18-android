@@ -1,5 +1,6 @@
 package com.rumad.week3app.service;
 
+import com.rumad.week3app.model.ForecastResponse;
 import com.rumad.week3app.model.WeatherResponse;
 
 import okhttp3.ResponseBody;
@@ -16,5 +17,8 @@ public interface WeatherService {
                                             @Query("lat") String lat,
                                             @Query("long") String lng,
                                             @Query("zip") String zip);
+
+    @GET("/data/2.5/forecast")
+    Call<ForecastResponse> getForecast(@Query("appid") String appid, @Query("q") String city);
 
 }
