@@ -7,7 +7,7 @@ This week we learned about the following:
 * Location
 
 ## Relevant Links
-* [Location] (https://developer.android.com/training/location/retrieve-current)
+* [Location](https://developer.android.com/training/location/retrieve-current)
 * [Retrofit](http://square.github.io/retrofit/)
 * [OpenWeatherMap](https://openweathermap.org/api)
 
