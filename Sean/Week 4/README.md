@@ -21,7 +21,7 @@ Make an app that uses an API like the app we made together. Here are some ideas 
 * Make an app that tells you something about the weather. It can be as simple as telling you the current degrees outside. Here are some available APIs (they require you to sign up to get an API key, let me know if you need help with this)
     - [OpenWeatherMap](https://openweathermap.org/api)
     - [Yahoo Weather](https://developer.yahoo.com/weather/)
-* Make an app that [translates english into Minion](https://rapidapi.com/orthosie/api/Minion%20Translator) (this also requires you to make an account and only allows 15 requests per day)
+* Make an app that [translates English into Minion](https://rapidapi.com/orthosie/api/Minion%20Translator) (this also requires you to make an account and only allows 15 requests per day)
 * Check out some other free and fun APIs [this API marketplace](https://rapidapi.com/) or any other marketplace you can find!
 
 ## Material for Others
