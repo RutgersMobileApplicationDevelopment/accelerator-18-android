@@ -217,7 +217,7 @@ public class WeatherResponse {
          */
 
         private double speed;
-        private int deg;
+        private double deg;
 
         public double getSpeed() {
             return speed;
@@ -227,7 +227,7 @@ public class WeatherResponse {
             this.speed = speed;
         }
 
-        public int getDeg() {
+        public double getDeg() {
             return deg;
         }
 

@@ -1,5 +1,6 @@
 package com.rumad.week3app;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.rumad.week3app.model.WeatherResponse;
 import com.rumad.week3app.service.RetrofitClient;
 import com.rumad.week3app.service.WeatherService;
@@ -33,9 +35,39 @@ public class WeatherQueryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void updateLocation(Location location) {
+        updateWeather(location);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    private void updateWeather(Location location) {
+        Call<WeatherResponse> call;
+        Log.d(WeatherQueryFragment.class.getName(), location.getLatitude() + " " + location.getLongitude());
+        if (location != null) {
+            call = service.getCurrentWeather(WeatherService.APP_ID, location.getLatitude(), location.getLongitude());
+        } else {
+            call = service.getCurrentWeatherFromCity(WeatherService.APP_ID, editText.getText().toString());
+        }
+
+        call.enqueue(new Callback<WeatherResponse>() {
+                    @Override
+                    public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                        if (response.body() != null) {
+                            Log.d(WeatherListFragment.class.getName(), response.body().toString());
+                        }
+                        textviewCity.setText(response.body().getName());
+                        textviewTemp.setText(Double.toString(response.body().getMain().getTemp()));
+                    }
+
+                    @Override
+                    public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                        Log.d(WeatherListFragment.class.getName(), t.getMessage());
+                    }
+                });
     }
 
     @Override
@@ -53,22 +85,7 @@ public class WeatherQueryFragment extends Fragment {
         weatherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                service.getCurrentWeather(WeatherService.APP_ID, editText.getText().toString(), null, null, null)
-                        .enqueue(new Callback<WeatherResponse>() {
-                            @Override
-                            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                                if (response.body() != null) {
-                                    Log.d(WeatherListFragment.class.getName(), response.body().toString());
-                                }
-                                textviewCity.setText(response.body().getName());
-                                textviewTemp.setText(Double.toString(response.body().getMain().getTemp()));
-                            }
-
-                            @Override
-                            public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                                Log.d(WeatherListFragment.class.getName(), t.getMessage());
-                            }
-                        });
+                updateWeather(null);
             }
         });
 

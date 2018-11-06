@@ -13,10 +13,11 @@ public interface WeatherService {
 
     @GET("/data/2.5/weather")
     Call<WeatherResponse> getCurrentWeather(@Query("appid") String appid,
-                                            @Query("q") String city,
-                                            @Query("lat") String lat,
-                                            @Query("long") String lng,
-                                            @Query("zip") String zip);
+                                            @Query("lat") Double lat,
+                                            @Query("lon") Double lng);
+
+    Call<WeatherResponse> getCurrentWeatherFromCity(@Query("appid") String appid,
+                                            @Query("q") String city);
 
     @GET("/data/2.5/forecast")
     Call<ForecastResponse> getForecast(@Query("appid") String appid, @Query("q") String city);
