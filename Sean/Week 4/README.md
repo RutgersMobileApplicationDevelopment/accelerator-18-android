@@ -15,6 +15,15 @@ We learned (at a basic level) how the internet works and how to interact with AP
 * Using Retrofit with Gson to make network requests
 * What "asychronous" means
 
+## Homework
+Make an app that uses an API like the app we made together. Here are some ideas that you can choose from:
+* Add functionality to the GitHub app we made together. Maybe make it so that you can get information about a repository a user owns or something like that
+* Make an app that tells you something about the weather. It can be as simple as telling you the current degrees outside. Here are some available APIs (they require you to sign up to get an API key, let me know if you need help with this)
+    - [OpenWeatherMap](https://openweathermap.org/api)
+    - [Yahoo Weather](https://developer.yahoo.com/weather/)
+* Make an app that translates english into [Minion](https://rapidapi.com/orthosie/api/Minion%20Translator) (this also requires you to make an account and only allows 15 requests per day)
+* Check out some other free and fun APIs [on this API marketplace](https://rapidapi.com/) or any other marketplace you can find!
+
 ## Material for Others
 * [This video](https://www.youtube.com/watch?v=R4XU8yPzSx0) sums up what we learned
     - Feel free to check out more content from FutureStudio, they have good Retrofit tutorials
