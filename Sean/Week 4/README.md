@@ -16,3 +16,5 @@ We learned (at a basic level) how the internet works and how to interact with AP
 * What "asychronous" means
 
 ## Material for Others
+* [This video](https://www.youtube.com/watch?v=R4XU8yPzSx0) sums up what we learned
+    - Feel free to check out more content from FutureStudio, they have good Retrofit tutorials
