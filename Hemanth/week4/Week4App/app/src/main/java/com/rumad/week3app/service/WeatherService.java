@@ -20,6 +20,7 @@ public interface WeatherService {
                                             @Query("q") String city);
 
     @GET("/data/2.5/forecast")
-    Call<ForecastResponse> getForecast(@Query("appid") String appid, @Query("q") String city);
+    Call<ForecastResponse> getForecast(@Query("appid") String appid, @Query("q") String city, @Query("lat") Double lat,
+                                       @Query("lon") Double lng);
 
 }

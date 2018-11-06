@@ -1,5 +1,7 @@
 package com.rumad.week3app;
 
+import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class WeatherListFragment extends Fragment {
+public class WeatherListFragment extends Fragment implements MainActivity.MyLocationListener {
 
     RecyclerView recyclerView;
     Button button;
@@ -37,8 +39,9 @@ public class WeatherListFragment extends Fragment {
 
     ArrayList<ForecastResponse.ListBean> items = new ArrayList<>();
 
-    public WeatherListFragment() {
-        // Required empty public constructor
+    @Override
+    public void updateLocation(Location location) {
+        updateWeather(location);
     }
 
     @Override
@@ -59,26 +62,43 @@ public class WeatherListFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                service.getForecast(WeatherService.APP_ID, editText.getText().toString())
-                        .enqueue(new Callback<ForecastResponse>() {
-                            @Override
-                            public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
-                                items = new ArrayList<>(response.body().getList());
-                                recyclerView.getAdapter().notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onFailure(Call<ForecastResponse> call, Throwable t) {
-                                Log.d(WeatherListFragment.class.getName(), t.getMessage());
-                            }
-                        });
+                updateWeather(null);
             }
         });
-
 
         // Inflate the layout for this fragment
         return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getLocation();
+    }
+
+    private void updateWeather(Location location) {
+        Call<ForecastResponse> call;
+        if (location != null) {
+            call = service.getForecast(WeatherService.APP_ID, null, location.getLatitude(), location.getLongitude());
+        } else {
+            call = service.getForecast(WeatherService.APP_ID, editText.getText().toString(), null, null);
+        }
+
+        call.enqueue(new Callback<ForecastResponse>() {
+            @Override
+            public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
+                items = new ArrayList<>(response.body().getList());
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ForecastResponse> call, Throwable t) {
+                Log.d(WeatherListFragment.class.getName(), t.getMessage());
+            }
+        });
+    }
+
 
     private class WeatherViewHolder extends RecyclerView.ViewHolder {
         WeatherViewHolder(@NonNull View itemView) {

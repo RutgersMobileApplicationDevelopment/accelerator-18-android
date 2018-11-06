@@ -1,5 +1,6 @@
 package com.rumad.week3app;
 
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -22,7 +23,7 @@ import com.rumad.week3app.service.RetrofitClient;
 import com.rumad.week3app.service.WeatherService;
 
 
-public class WeatherQueryFragment extends Fragment {
+public class WeatherQueryFragment extends Fragment implements MainActivity.MyLocationListener {
     WeatherService service;
 
     EditText editText;
@@ -35,8 +36,16 @@ public class WeatherQueryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
     public void updateLocation(Location location) {
         updateWeather(location);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getLocation();
     }
 
     @Override
