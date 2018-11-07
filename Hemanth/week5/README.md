@@ -4,7 +4,7 @@
 
 This week we learned about the following:
 
-* Notificatins
+* Notifications
 * WorkManager
 
 ## Relevant Links
