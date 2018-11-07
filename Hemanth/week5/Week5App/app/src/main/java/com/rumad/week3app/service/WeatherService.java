@@ -16,6 +16,7 @@ public interface WeatherService {
                                             @Query("lat") Double lat,
                                             @Query("lon") Double lng);
 
+    @GET("/data/2.5/weather")
     Call<WeatherResponse> getCurrentWeatherFromCity(@Query("appid") String appid,
                                             @Query("q") String city);
 

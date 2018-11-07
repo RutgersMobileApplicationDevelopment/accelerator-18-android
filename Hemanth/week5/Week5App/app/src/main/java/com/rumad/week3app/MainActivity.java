@@ -13,6 +13,9 @@ import android.widget.FrameLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.rumad.week3app.workers.WeatherWorker;
+
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +24,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         frameLayout = findViewById(R.id.frame_layout_holder);
         getLocation();
+
+        PeriodicWorkRequest weatherWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 15, TimeUnit.MINUTES).build();
+        WorkManager.getInstance().enqueue(weatherWork);
 
         switchFragment(new WeatherQueryFragment());
     }
