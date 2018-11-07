@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = findViewById(R.id.frame_layout_holder);
         getLocation();
 
-        PeriodicWorkRequest weatherWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 15, TimeUnit.MINUTES).build();
-        WorkManager.getInstance().enqueue(weatherWork);
-
         switchFragment(new WeatherQueryFragment());
     }
 
@@ -62,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_LOCATION: {
                 if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getCurrLocation();
+                    scheduleUpdates();
                 }
             }
         }
@@ -111,7 +109,10 @@ public class MainActivity extends AppCompatActivity {
             getCurrLocation();
         }
     }
-
+    private void scheduleUpdates() {
+        PeriodicWorkRequest weatherWork = new PeriodicWorkRequest.Builder(WeatherWorker.class, 15, TimeUnit.MINUTES).build();
+        WorkManager.getInstance().enqueue(weatherWork);
+    }
     private void getCurrLocation() {
         try {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
