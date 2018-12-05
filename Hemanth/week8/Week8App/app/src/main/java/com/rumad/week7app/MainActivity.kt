@@ -7,20 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.R.id.async
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.rumad.week7app.db.AppDatabase
-import com.rumad.week7app.db.dao.TodoDao
-import com.rumad.week7app.db.dbinstance
 import com.rumad.week7app.db.entities.Todo
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.viewholder_todo.view.*
 import java.util.*
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
-    lateinit var todoDao: TodoDao
+    lateinit var viewmodel : TodoViewModel
 
     lateinit var adapter : Adapter
 
@@ -28,49 +25,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        todoDao = dbinstance.getDatabase(this).todoDao()
+        viewmodel = ViewModelProvider
+                .AndroidViewModelFactory
+                .getInstance(application).create(TodoViewModel :: class.java)
+
+
+        viewmodel.getTodos().observe(this, androidx.lifecycle.Observer {
+            adapter.updateTodos(it)
+        })
 
         adapter = Adapter({
-            deleteTodo(it)
+            viewmodel.deleteTodo(it)
         })
 
         recyclerview_todos.adapter = adapter
         recyclerview_todos.layoutManager = LinearLayoutManager(this)
 
-        updateTodoList()
-
         fab_add.setOnClickListener {
-            addTodo(getTodoFromForm())
-        }
-    }
-
-    fun updateTodoList() {
-        thread {
-            adapter.updateTodos(todoDao.getAll())
-        }
-    }
-
-    fun addTodo(todo: Todo) {
-        thread {
-            todoDao.insertAll(todo)
-            adapter.todos.add(todo)
-            runOnUiThread {
-                adapter.notifyDataSetChanged()
-            }
-
-            Log.d(javaClass.name, "Finished inserting ${todo}")
-        }
-    }
-
-    fun deleteTodo(todo : Todo) {
-        thread {
-            todoDao.delete(todo)
-            val newTodos = todoDao.getAll()
-            runOnUiThread {
-                adapter.updateTodos(newTodos)
-            }
-
-            Log.d(javaClass.name, "Finished deleting ${todo}")
+            viewmodel.addTodo(getTodoFromForm())
         }
     }
 
